@@ -2,10 +2,10 @@ variable "region" {
     default = "ap-southeast-1"
 }
 variable "access_key"{
-    default = "AKIA5SJPZCJ3Q4W3OSOW"
+    default = "{secrets.access_key}"
 }
 variable "secret_key"{
-    default = "X0civ6q/Agp+ui3uRoG61jBC57ED2Jo1FDEvetQP"
+    default = "{secrets.secret_key}"
 }
 variable "VPC_CIDR_Block"{
     default = "10.0.0.0/16"
