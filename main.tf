@@ -68,7 +68,11 @@ resource "aws_route_table" "TerraformRT"{
     
 }
 resource "aws_route_table_association" "TerraformRT_Association"{
-    subnet_id      = aws_subnet.Terraform_Public_Subnet.id
+    subnet_id      = aws_subnet.Terraform_Public_Subnet_1a.id
+    route_table_id = aws_route_table.TerraformRT.id
+}
+resource "aws_route_table_association" "TerraformRT_Association"{
+    subnet_id      = aws_subnet.Terraform_Public_Subnet_1b.id
     route_table_id = aws_route_table.TerraformRT.id
 }
 #End of public subnet components
@@ -146,7 +150,6 @@ resource "aws_security_group" "Tabist_Security_group" {
 resource "aws_instance" "tabist_EC2_1" {
   ami           = "ami-00b8d9cb8a7161e41"
   instance_type = "t2.micro"
-  instance_state = start
   availability_zone = "ap-southeast-1a"
   key_name = "TabistDevOpsTest"
   subnet_id = aws_subnet.Terraform_Public_Subnet_1a.id
@@ -158,7 +161,6 @@ resource "aws_instance" "tabist_EC2_1" {
 resource "aws_instance" "tabist_EC2_2" {
   ami           = "ami-00b8d9cb8a7161e41"
   instance_type = "t2.micro"
-  instance_state = start
   availability_zone = "ap-southeast-1b"
   key_name = "TabistDevOpsTest"
   subnet_id = aws_subnet.Terraform_Public_Subnet_1b.id
