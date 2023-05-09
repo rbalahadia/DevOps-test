@@ -9,6 +9,10 @@ jobs:
   plan:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.access_key }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.secret_key }}
+
     permissions:
       pull-requests: write
     steps:  
