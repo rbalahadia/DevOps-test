@@ -210,6 +210,17 @@ resource "aws_instance" "tabist_EC2_2" {
   associate_public_ip_address = true
   subnet_id = aws_subnet.Terraform_Public_Subnet_1b.id
   vpc_security_group_ids = [aws_security_group.Tabist_Security_group.id]
+  user_data = <<EOF
+  #!/bin/bash
+  echo "installing SSM agent"
+  sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+  service amazon-ssm-agent start
+  yum install docker -y
+  sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+  sudo chmod +x /usr/local/bin/docker-compose
+  service docker start
+  EOF
+  iam_instance_profile = "${aws_iam_instance_profile.Tabist_instance_profile.name}"
   tags = {
     Name = "Tabist_EC2_2"
   }
