@@ -148,7 +148,7 @@ resource "aws_security_group" "Tabist_Security_group" {
   }
 }
 resource "aws_instance" "tabist_EC2_1" {
-  ami           = "ami-00b8d9cb8a7161e41"
+  ami           = "ami-052f483c20fa1351a"
   instance_type = "t2.micro"
   availability_zone = "ap-southeast-1a"
   key_name = "TabistDevOpsTest"
@@ -159,7 +159,7 @@ resource "aws_instance" "tabist_EC2_1" {
   }
 }
 resource "aws_instance" "tabist_EC2_2" {
-  ami           = "ami-00b8d9cb8a7161e41"
+  ami           = "ami-052f483c20fa1351a"
   instance_type = "t2.micro"
   availability_zone = "ap-southeast-1b"
   key_name = "TabistDevOpsTest"
