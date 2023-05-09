@@ -189,14 +189,14 @@ resource "aws_security_group" "Tabist_Security_group" {
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
-    cidr_blocks      = [var.public_subnet_cidr, "49.144.200.29/32"]
+    cidr_blocks      = ["0.0.0.0/0"]
   }
   ingress {
     description      = "TLS from VPC"
     from_port        = 443
     to_port          = 443
     protocol         = "tcp"
-    cidr_blocks      = [var.public_subnet_cidr, "49.144.200.29/32"]
+    cidr_blocks      = ["0.0.0.0/0"]
   }
 
 
