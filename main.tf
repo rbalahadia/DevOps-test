@@ -206,16 +206,14 @@ resource "aws_instance" "tabist_EC2_1" {
   associate_public_ip_address = true
   subnet_id = aws_subnet.Terraform_Public_Subnet_1a.id
   vpc_security_group_ids = [aws_security_group.Tabist_Security_group.id]
-  user_data = <<EOF
-  #!/bin/bash
+  user_data_base64     = base64encode("#!/bin/bash
   echo "installing SSM agent"
   sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
-  service amazon-ssm-agent start
-  yum install docker -y
+  sudo service amazon-ssm-agent start
+  sudo yum install docker -y
   sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
-  service docker start
-  EOF
+  sudo service docker start")
   iam_instance_profile = "${aws_iam_instance_profile.Tabist_instance_profile.name}"
   metadata_options {
      http_tokens = "required"
@@ -235,16 +233,14 @@ resource "aws_instance" "tabist_EC2_2" {
   associate_public_ip_address = true
   subnet_id = aws_subnet.Terraform_Public_Subnet_1b.id
   vpc_security_group_ids = [aws_security_group.Tabist_Security_group.id]
-  user_data = <<EOF
-  #!/bin/bash
+  user_data_base64     = base64encode("#!/bin/bash
   echo "installing SSM agent"
   sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
   sudo service amazon-ssm-agent start
   sudo yum install docker -y
   sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
-  sudo service docker start
-  EOF
+  sudo service docker start")
   iam_instance_profile = "${aws_iam_instance_profile.Tabist_instance_profile.name}"
   metadata_options {
      http_tokens = "required"
