@@ -152,6 +152,7 @@ resource "aws_instance" "tabist_EC2_1" {
   instance_type = "t2.micro"
   availability_zone = "ap-southeast-1a"
   key_name = "TabistDevOpsTest"
+  associate_public_ip_address = true
   subnet_id = aws_subnet.Terraform_Public_Subnet_1a.id
   vpc_security_group_ids = [aws_security_group.Tabist_Security_group.id]
   tags = {
@@ -163,6 +164,7 @@ resource "aws_instance" "tabist_EC2_2" {
   instance_type = "t2.micro"
   availability_zone = "ap-southeast-1b"
   key_name = "TabistDevOpsTest"
+  associate_public_ip_address = true
   subnet_id = aws_subnet.Terraform_Public_Subnet_1b.id
   vpc_security_group_ids = [aws_security_group.Tabist_Security_group.id]
   tags = {
