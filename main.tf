@@ -126,52 +126,6 @@ resource "aws_route_table_association" "TerraformRT_Association_1b"{
     route_table_id = aws_route_table.TerraformRT.id
 }
 #End of public subnet components
-
-
-#Private Subnet
-resource "aws_subnet" "Terraform_Private_Subnet"{
-    vpc_id = aws_vpc.Terraform_VPC.id
-    cidr_block = var.private_subnet_cidr
-    availability_zone = "ap-southeast-1a"
-    tags = {
-      "Name" = "Tabist Terraform Private Subnet"
-    }
-
-}
-#Private Subnet components
-#Creation of NatGateway  
-resource "aws_eip" "NATeip" {
-  vpc      = true
-}
-resource "aws_nat_gateway" "TerraformNat"{
-    allocation_id = aws_eip.NATeip.id
-    subnet_id     = aws_subnet.Terraform_Private_Subnet.id
-    depends_on = [aws_internet_gateway.TerraformIG]
-    tags = {
-        Name = "TerraformNat"
-        Description = "Tabist Terraform Nat gateway"
-        }
-    }   
-resource "aws_route_table" "TerraformPrivateRT"{
-    vpc_id = aws_vpc.Terraform_VPC.id
-    route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.TerraformNat.id
-   }
-
-
-    tags = {
-      "Name" = "Tabist TerraformPrivateRT"
-      "Description" = "Route table for Private Subnet"
-    }
-
-    
-}
-resource "aws_route_table_association" "TerraformNatRT_Association"{
-    subnet_id      = aws_subnet.Terraform_Private_Subnet.id
-    route_table_id = aws_route_table.TerraformPrivateRT.id
-}
-
 resource "aws_security_group" "Tabist_Security_group" {
   name        = "EC2 security group"
   description = "Allow TLS inbound traffic"
