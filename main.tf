@@ -24,12 +24,21 @@ resource "aws_vpc" "Terraform_VPC"{
     }
 
 
-resource "aws_subnet" "Terraform_Public_Subnet"{
+resource "aws_subnet" "Terraform_Public_Subnet_1a"{
     vpc_id = aws_vpc.Terraform_VPC.id
     cidr_block = var.public_subnet_cidr
     availability_zone = "ap-southeast-1a"
     tags = {
-      "Name" = " Tabist Terraform Public Subnet"
+      "Name" = " Tabist Terraform Public Subnet 1a"
+    }
+
+}
+resource "aws_subnet" "Terraform_Public_Subnet_1b"{
+    vpc_id = aws_vpc.Terraform_VPC.id
+    cidr_block = var.public_subnet_cidr
+    availability_zone = "ap-southeast-1b"
+    tags = {
+      "Name" = " Tabist Terraform Public Subnet 1b"
     }
 
 }
@@ -140,7 +149,7 @@ resource "aws_instance" "tabist_EC2_1" {
   instance_state = start
   availability_zone = "ap-southeast-1a"
   key_name = "TabistDevOpsTest"
-  subnet_id = var.public_subnet
+  subnet_id = aws_subnet.Terraform_Public_Subnet_1a.id
   vpc_security_group_ids = aws_security_group.Tabist_Security_group.id
   tags = {
     Name = "Tabist_EC2"
@@ -152,7 +161,7 @@ resource "aws_instance" "tabist_EC2_2" {
   instance_state = start
   availability_zone = "ap-southeast-1b"
   key_name = "TabistDevOpsTest"
-  subnet_id = var.public_subnet
+  subnet_id = aws_subnet.Terraform_Public_Subnet_1b.id
   vpc_security_group_ids = aws_security_group.Tabist_Security_group.id
   tags = {
     Name = "Tabist_EC2_2"
