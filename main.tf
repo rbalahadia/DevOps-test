@@ -134,3 +134,27 @@ resource "aws_security_group" "Tabist_Security_group" {
     Name = "Tabist Ec2 Security group"
   }
 }
+resource "aws_instance" "tabist_EC2_1" {
+  ami           = "ami-00b8d9cb8a7161e41"
+  instance_type = "t2.micro"
+  instance_state = start
+  availability_zone = "ap-southeast-1a"
+  key_name = "TabistDevOpsTest"
+  subnet_id = var.public_subnet
+  vpc_security_group_ids = aws_security_group.Tabist_Security_group.id
+  tags = {
+    Name = "Tabist_EC2"
+  }
+}
+resource "aws_instance" "tabist_EC2_2" {
+  ami           = "ami-00b8d9cb8a7161e41"
+  instance_type = "t2.micro"
+  instance_state = start
+  availability_zone = "ap-southeast-1b"
+  key_name = "TabistDevOpsTest"
+  subnet_id = var.public_subnet
+  vpc_security_group_ids = aws_security_group.Tabist_Security_group.id
+  tags = {
+    Name = "Tabist_EC2_2"
+  }
+}
