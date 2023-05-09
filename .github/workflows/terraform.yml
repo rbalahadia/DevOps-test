@@ -24,6 +24,6 @@ jobs:
             curl https://releases.hashicorp.com/terraform/0.14.11/terraform_0.14.11_linux_amd64.zip -O -J -L
             sudo unzip terraform_0.14.11_linux_amd64.zip && rm terraform_0.14.11_linux_amd64.zip
             cat main.tf
-            #terraform init
-            #terraform validate
-            #terraform plan
+            terraform init
+            terraform validate
+            terraform plan
