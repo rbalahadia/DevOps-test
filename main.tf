@@ -220,6 +220,7 @@ resource "aws_instance" "tabist_EC2_1" {
   metadata_options {
      http_tokens = "required"
      instance_metadata_tags = "enabled"
+     http_endpoint = "enabled"
   }
   tags = {
     Name = "Tabist_EC2"
@@ -248,6 +249,7 @@ resource "aws_instance" "tabist_EC2_2" {
   metadata_options {
      http_tokens = "required"
      instance_metadata_tags = "enabled"
+     http_endpoint = "enabled"
   }
   tags = {
     Name = "Tabist_EC2_2"
