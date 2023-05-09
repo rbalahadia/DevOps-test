@@ -25,9 +25,6 @@ resource "aws_vpc" "Terraform_VPC"{
 
 resource "aws_iam_role" "Tabist_EC2_Role" {
   name = "Tabist_EC2_Role"
-
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
   assume_role_policy = jsonencode({
     "Version": "2012-10-17",
     "Statement": [
@@ -44,6 +41,26 @@ resource "aws_iam_role" "Tabist_EC2_Role" {
         }
     ]
 })
+  inline_policy {
+    name = "Tabist_EC2_Policy"
+
+    policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "TabistEC2Policy",
+            "Effect": "Allow",
+            "Action": [
+                "lambda:*",
+                "ec2:*",
+                "ssm:*",
+                "s3:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+   })
+  }
 
   tags = {
     tag-key = "Tabist EC2 role"
@@ -163,8 +180,9 @@ resource "aws_security_group" "Tabist_Security_group" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = [var.public_subnet_cidr,"49.144.200.29/32"]
+    cidr_blocks      = [var.public_subnet_cidr, "49.144.200.29"]
   }
+
 
   egress {
     from_port        = 0
