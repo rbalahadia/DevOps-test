@@ -35,7 +35,7 @@ resource "aws_subnet" "Terraform_Public_Subnet_1a"{
 }
 resource "aws_subnet" "Terraform_Public_Subnet_1b"{
     vpc_id = aws_vpc.Terraform_VPC.id
-    cidr_block = var.public_subnet_cidr
+    cidr_block = var.public_subnet_cidr2
     availability_zone = "ap-southeast-1b"
     tags = {
       "Name" = " Tabist Terraform Public Subnet 1b"
