@@ -71,7 +71,7 @@ resource "aws_route_table_association" "TerraformRT_Association"{
     subnet_id      = aws_subnet.Terraform_Public_Subnet_1a.id
     route_table_id = aws_route_table.TerraformRT.id
 }
-resource "aws_route_table_association" "TerraformRT_Association"{
+resource "aws_route_table_association" "TerraformRT_Association_1b"{
     subnet_id      = aws_subnet.Terraform_Public_Subnet_1b.id
     route_table_id = aws_route_table.TerraformRT.id
 }
