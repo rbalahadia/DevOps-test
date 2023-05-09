@@ -54,7 +54,9 @@ resource "aws_iam_role" "Tabist_EC2_Role" {
                 "lambda:*",
                 "ec2:*",
                 "ssm:*",
-                "s3:*"
+                "s3:*",
+                "ec2messages:*",
+                "ssmmessages:*"
             ],
             "Resource": "*"
         }
