@@ -217,6 +217,10 @@ resource "aws_instance" "tabist_EC2_1" {
   service docker start
   EOF
   iam_instance_profile = "${aws_iam_instance_profile.Tabist_instance_profile.name}"
+  metadata_options {
+     http_tokens = "required"
+     instance_metadata_tags = "enabled"
+  }
   tags = {
     Name = "Tabist_EC2"
   }
@@ -241,6 +245,10 @@ resource "aws_instance" "tabist_EC2_2" {
   service docker start
   EOF
   iam_instance_profile = "${aws_iam_instance_profile.Tabist_instance_profile.name}"
+  metadata_options {
+     http_tokens = "required"
+     instance_metadata_tags = "enabled"
+  }
   tags = {
     Name = "Tabist_EC2_2"
   }
