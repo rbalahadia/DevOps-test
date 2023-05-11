@@ -152,6 +152,20 @@ resource "aws_security_group" "Tabist_Security_group" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
+  ingress {
+    description      = "TLS from VPC"
+    from_port        = 4000
+    to_port          = 4000
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+  ingress {
+    description      = "TLS from VPC"
+    from_port        = 14000
+    to_port          = 14000
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
 
 
   egress {
@@ -168,7 +182,7 @@ resource "aws_security_group" "Tabist_Security_group" {
 }
 resource "aws_instance" "tabist_EC2_1" {
   ami           = "ami-052f483c20fa1351a"
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
   availability_zone = "ap-southeast-1a"
   key_name = "TabistDevOpsTest"
   associate_public_ip_address = true
@@ -188,7 +202,7 @@ resource "aws_instance" "tabist_EC2_1" {
 }
 resource "aws_instance" "tabist_EC2_2" {
   ami           = "ami-052f483c20fa1351a"
-  instance_type = "t2.micro"
+  instance_type = "t2.small"
   availability_zone = "ap-southeast-1b"
   key_name = "TabistDevOpsTest"
   associate_public_ip_address = true

@@ -23,6 +23,8 @@ echo "FROM openjdk:20-slim-buster
 WORKDIR /app
 COPY . .
 CMD kafka_2.13-3.4.0/bin/kafka-server-start.sh config/server.properties" > Dockerfile.kafka
+docker build -t zookeeper:latest -f Dockerfile.zookeeper .
+docker build -t kafka-server:latest -f Dockerfile.kafka .
 cd ..
 echo "# the directory where the snapshot is stored.
 dataDir=/tmp/zookeeper
