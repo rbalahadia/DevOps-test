@@ -12,7 +12,7 @@ service nginx start
 wget https://downloads.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz
 tar -xf kafka_2.13-3.4.0.tgz
 rm -rf kafka_2.13-3.4.0.tgz
-mkdir dockerfiles configfiles
+mkdir dockerfiles configfiles zookeeperdata kafka-server-data
 cd dockerfiles
 echo "FROM openjdk:20-slim-buster
 WORKDIR /app
@@ -52,7 +52,7 @@ services:
       - /opt/kafka-cluster/kafka-server-data/:/tmp/kafka-logs/
       - /opt/kafka-cluster/configfiles/kafka-server/server.properties:/app/config/server.properties
     ports:
-      - 9092:9092" > docker-compose.yml
+      - 4000:4000" > docker-compose.yml
 docker-compose up -d
 mkdir configfiles/kafka-server
 echo "broker.id=0
@@ -66,6 +66,8 @@ transaction.state.log.replication.factor=1
 transaction.state.log.min.isr=1
 log.retention.check.interval.ms=300000
 zookeeper.connect=localhost:14000
-zookeeper.connection.timeout.ms=18000" > configfiles/kafka-server/server.properties
+zookeeper.connection.timeout.ms=18000
+listeners=INTERNAL://:9092,EXTERNAL://:4000
+advertised.listeners=INTERNAL://kafka:9092,EXTERNAL://localhost:4000" > configfiles/kafka-server/server.properties
 docker compose up -d kafka
 yum install java-11* -y
